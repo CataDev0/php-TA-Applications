@@ -18,9 +18,12 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        "firstname",
+        "lastname",
+        "username",
+        "email",
+        "password",
+        "role"
     ];
 
     /**
@@ -44,5 +47,29 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    // Tasks created by teachers
+    public function createdTasks()
+    {
+        return $this->hasMany(Task::class, 'teacher_id');
+    }
+
+    // Tasks accepted by TAs
+    public function acceptedTasks()
+    {
+        return $this->hasMany(Task::class, 'ta_id');
+    }
+
+    // Check if user is teacher
+    public function isTeacher()
+    {
+        return $this->role === 'teacher';
+    }
+    
+    // Check if user is TA
+    public function isTA()
+    {
+        return $this->role === 'ta';
     }
 }
