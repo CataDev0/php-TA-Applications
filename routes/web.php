@@ -27,3 +27,5 @@ Route::post('/tasks/{id}/accept', [TaskController::class, 'accept'])->name('task
 
 // Mark a task as completed
 Route::post('/tasks/{id}/complete', [TaskController::class, 'complete'])->name('tasks.complete');
+
+Route::get("/error", [TaskController::class, "error"])->defaults("error", "Generic error");

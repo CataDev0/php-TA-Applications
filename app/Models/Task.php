@@ -17,13 +17,13 @@ class Task extends Model
     ];
 
     // Teacher who created the task
-    public function teacher()
+    public function getTeacher()
     {
         return $this->belongsTo(User::class, 'teacher_id');
     }
 
     // TA who accepted the task
-    public function ta()
+    public function getTA()
     {
         return $this->belongsTo(User::class, 'ta_id');
     }

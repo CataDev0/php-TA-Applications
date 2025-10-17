@@ -6,6 +6,7 @@
 
     composer install
     npm i && npm run build
+    php artisan migrate
 
 ### Running the dev server
 

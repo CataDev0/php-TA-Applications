@@ -6,18 +6,25 @@ use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use function Laravel\Prompts\error;
 
 class TaskController extends Controller
 {
     // Show all tasks relevant to the logged-in user
     public function index()
     {
-        $user = Auth::user();
+        // $user = Auth::user();
+
+        // if (!$user) return abort(401, "You are not authorized");
+
+        // Temporary solution for testing only
+        $user = User::first();
 
         if ($user->isTeacher()) {
             // Teachers see tasks they created
             $tasks = Task::where('teacher_id', $user->id)->get();
-        } else {
+        }
+        else {
             // TAs see open tasks and tasks they accepted
             $tasks = Task::where(function ($query) use ($user) {
                 $query->whereNull('ta_id')
@@ -103,5 +110,9 @@ class TaskController extends Controller
         $task->save();
 
         return redirect()->route('tasks.index')->with('success', 'Task marked as completed!');
+    }
+
+    public function error($error) {
+        return view("/error")->with("error", "Generic error");
     }
 }
