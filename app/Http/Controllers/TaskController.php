@@ -14,11 +14,9 @@ class TaskController extends Controller
     public function index()
     {
         // $user = Auth::user();
-
-        // if (!$user) return abort(401, "You are not authorized");
-
         // Temporary solution for testing only
         $user = User::first();
+        if (!$user) abort(401, "You are not authorized");
 
         if ($user->isTeacher()) {
             // Teachers see tasks they created
