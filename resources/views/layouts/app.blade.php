@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    {{-- Load global CSS into layout  --}}
     @vite('resources/css/app.css')
     <title>TApp</title>
 </head>
@@ -9,6 +10,6 @@
 <main class="">
     @yield('content')
 </main>
-<footer class="bottom-0 w-full fixed text-center bg-gray-200">Copyright 2025</footer>
+<footer class="bottom-0 w-full fixed text-center bg-gray-200">PHP IS-115 2025</footer>
 </body>
 </html>

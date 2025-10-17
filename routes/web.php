@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 
@@ -8,10 +9,9 @@ Route::get('/', function () {
 });
 
 // Show Login page
-// This can be moved to a controller
-Route::get('/login', function () {
-    return view('login');
-});
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Show all tasks for the logged-in user (dashboard)
 Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');

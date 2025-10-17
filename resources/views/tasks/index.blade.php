@@ -8,8 +8,8 @@
             <tr>
                 <th class="py-3 px-6 text-left font-semibold text-gray-700">Title</th>
                 <th class="py-3 px-6 text-left font-semibold text-gray-700">Description</th>
-                <th class="py-3 px-6 text-left font-semibold text-gray-700">Date/Time</th>
-                <th class="py-3 px-6 text-left font-semibold text-gray-700">Pay</th>
+                <th class="py-3 px-6 text-left font-semibold text-gray-700">Teacher</th>
+                <th class="py-3 px-6 text-left font-semibold text-gray-700">Date</th>
                 <th class="py-3 px-6 text-left font-semibold text-gray-700">Status</th>
                 <th class="py-3 px-6 text-left font-semibold text-gray-700">Actions</th>
             </tr>
@@ -19,8 +19,8 @@
             <tr class="border-b hover:bg-gray-50">
                 <td class="py-2 px-6">{{ $task->title }}</td>
                 <td class="py-2 px-6">{{ $task->description }}</td>
+                <td class="py-2 px-6">{{ $task->teacher->firstname }} {{ $task->teacher->lastname }}</td>
                 <td class="py-2 px-6">{{ $task->date_time }}</td>
-                <td class="py-2 px-6">{{ $task->pay }}</td>
                 <td class="py-2 px-6">
                     <span class="
                         px-2 py-1 rounded text-xs font-medium

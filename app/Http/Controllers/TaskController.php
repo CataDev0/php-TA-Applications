@@ -15,7 +15,7 @@ class TaskController extends Controller
     {
         // $user = Auth::user();
         // Temporary solution for testing only
-        $user = User::first();
+        $user = User::where('role', 'ta')->first();
         if (!$user) abort(401, "You are not authorized");
 
         if ($user->isTeacher()) {
@@ -56,7 +56,6 @@ class TaskController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'date_time' => 'nullable|date',
-            'pay' => 'nullable|numeric',
             'urgency' => 'nullable|string|max:50',
         ]);
 
@@ -64,7 +63,6 @@ class TaskController extends Controller
             'title' => $validated['title'],
             'description' => $validated['description'] ?? null,
             'date_time' => $validated['date_time'] ?? null,
-            'pay' => $validated['pay'] ?? null,
             'urgency' => $validated['urgency'] ?? null,
             'status' => 'pending',
             'teacher_id' => $user->id,
@@ -99,7 +97,9 @@ class TaskController extends Controller
         $task = Task::findOrFail($id);
 
         // Only the teacher or assigned TA can mark as complete
-        $user = Auth::user();
+        // $user = Auth::user();
+        // Temporary solution for testing only
+        $user = User::where('role', 'ta')->first();
         if ($user->id !== $task->teacher_id && $user->id !== $task->ta_id) {
             abort(403, 'You cannot complete this task.');
         }
