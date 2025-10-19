@@ -1,1 +1,3 @@
-<h1>{{$error}}</h1>
+@section("content")
+    <h1>{{$error}}</h1>
+@endsection
