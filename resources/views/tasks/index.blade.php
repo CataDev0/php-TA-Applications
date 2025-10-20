@@ -37,6 +37,7 @@
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Teacher</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">TA</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Urgency</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
@@ -56,14 +57,20 @@
                                         {{ $task->teacher->firstname }} {{ $task->teacher->lastname }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-
+                                        @if($task->ta)
+                                            {{ $task->ta->firstname }} {{ $task->ta->lastname }}
+                                        @else
+                                            <span class="text-gray-400 italic">Not assigned</span>
+                                        @endif
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                                         <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full
                                                 @if($task->urgency === 'high') bg-red-100 text-red-800
                                                 @elseif($task->urgency === 'medium') bg-yellow-100 text-yellow-800
                                                 @elseif($task->urgency === 'low') bg-green-100 text-green-800
                                                 @endif">
                                                 {{ ucfirst($task->urgency) }}
-                                            </span>
+                                        </span>
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
