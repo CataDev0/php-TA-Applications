@@ -13,9 +13,7 @@ class TaskController extends Controller
     // Show all tasks relevant to the logged-in user
     public function index()
     {
-        // $user = Auth::user();
-        // Temporary solution for testing only
-        $user = User::where('role', 'ta')->first();
+        $user = Auth::user();
         if (!$user) abort(401, "You are not authorized");
 
         if ($user->isTeacher()) {
@@ -97,9 +95,7 @@ class TaskController extends Controller
         $task = Task::findOrFail($id);
 
         // Only the teacher or assigned TA can mark as complete
-        // $user = Auth::user();
-        // Temporary solution for testing only
-        $user = User::where('role', 'ta')->first();
+        $user = Auth::user();
         if ($user->id !== $task->teacher_id && $user->id !== $task->ta_id) {
             abort(403, 'You cannot complete this task.');
         }

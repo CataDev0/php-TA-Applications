@@ -19,7 +19,7 @@ class LoginController extends Controller
             'password' => ['required', 'string'],
         ]);
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt(['username' => $request ->username, 'password' => $request->password])) {
             $request->session()->regenerate();
 
             return redirect()->intended(route('tasks.index'));
