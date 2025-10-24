@@ -5,12 +5,12 @@
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 text-gray-900">
                 <div class="flex justify-between items-center mb-6">
-                    <h1 class="text-2xl font-semibold">Tasks</h1>
+                    <h1 class="text-2xl font-semibold">Application requests</h1>
 
                     @if(Auth::user()->isTeacher())
                         <a href="{{ route('tasks.create') }}"
                            class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                            Create New Task
+                            Create New Application Request
                         </a>
                     @endif
                 </div>
@@ -28,7 +28,7 @@
                 @endif
 
                 @if($tasks->isEmpty())
-                    <p class="text-gray-600 text-center py-8">No tasks available.</p>
+                    <p class="text-gray-600 text-center py-8">No application requests available.</p>
                 @else
                     <div class="overflow-x-auto">
                         <table class="min-w-full divide-y divide-gray-200">

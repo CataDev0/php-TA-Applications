@@ -15,8 +15,8 @@ class TaskSeeder extends Seeder
 
         // Create a task assigned to TA
         Task::create([
-            'title' => 'Grade Assignment 1',
-            'description' => 'Help grade the first homework assignments.',
+            'title' => 'Help grading student assignments',
+            'description' => 'Help grade the homework assignments.',
             'date_time' => now()->addDays(2),
             'urgency' => 'medium',
             'status' => 'accepted',
