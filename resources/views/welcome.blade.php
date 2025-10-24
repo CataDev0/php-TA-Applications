@@ -26,7 +26,6 @@
                                 Log in
                             </a>
 
-                            {{-- TBD Register route --}}
                             {{-- Only show register button if user is not logged in --}}
                             @if (Route::has('register'))
                                 <a href="{{ route('register') }}"

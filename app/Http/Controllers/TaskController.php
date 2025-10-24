@@ -35,6 +35,8 @@ class TaskController extends Controller
     public function create()
     {
         $user = Auth::user();
+
+        // Make sure the user is a teacher
         if (!$user->isTeacher()) {
             abort(403, 'Only teachers can create tasks.');
         }

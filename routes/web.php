@@ -12,12 +12,18 @@ Route::get('/', function () {
 
 // Show Login page
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+
+// Handle login form submission
 Route::post('/login', [LoginController::class, 'login']);
+
+// Handle logout
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+// Handle Register form submission
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
 
+// All tasks routes, requires authentication
 Route::middleware(['auth'])->group(function () {
     // Show all tasks for the logged-in user (dashboard)
     Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
