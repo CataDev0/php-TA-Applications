@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -30,4 +31,5 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/tasks/{id}/complete', [TaskController::class, 'complete'])->name('tasks.complete');
 });
 
-Route::get("/error", [TaskController::class, "error"])->defaults("error", "Generic error");
+// Error page
+Route::get("/error", [Controller::class, "error"])->name('error');

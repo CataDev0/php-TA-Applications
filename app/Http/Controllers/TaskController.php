@@ -105,8 +105,4 @@ class TaskController extends Controller
 
         return redirect()->route('tasks.index')->with('success', 'Task marked as completed!');
     }
-
-    public function error($error) {
-        return view("/error")->with("error", "Generic error");
-    }
 }
