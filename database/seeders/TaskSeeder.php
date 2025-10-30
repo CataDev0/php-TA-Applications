@@ -15,8 +15,9 @@ class TaskSeeder extends Seeder
 
         // Create a task assigned to TA
         Task::create([
-            'title' => 'Help grading student assignments',
-            'description' => 'Help grade the homework assignments.',
+            'title' => 'IS-213 Guidance and Grading',
+            'pay' => 120,
+            'description' => 'Guide students through IS-213 assignments and grade them.',
             'date_time' => now()->addDays(2),
             'urgency' => 'medium',
             'status' => 'accepted',
@@ -26,8 +27,9 @@ class TaskSeeder extends Seeder
 
         // Create an open (unassigned) task
         Task::create([
-            'title' => 'Prepare Review Session',
-            'description' => 'Prepare materials for student review session.',
+            'title' => 'ME-213 Review Session',
+            'pay' => 100,
+            'description' => 'Review ME-213 assignments and provide feedback.',
             'date_time' => now()->addWeek(),
             'urgency' => 'high',
             'status' => 'pending',

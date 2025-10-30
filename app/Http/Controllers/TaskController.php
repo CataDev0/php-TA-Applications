@@ -54,6 +54,7 @@ class TaskController extends Controller
 
         $validated = $request->validate([
             'title' => 'required|string|max:255',
+            'pay' => 'required|numeric|min:0',
             'description' => 'nullable|string',
             'date_time' => 'nullable|date',
             'urgency' => 'nullable|string|max:50',
@@ -61,6 +62,7 @@ class TaskController extends Controller
 
         $task = Task::create([
             'title' => $validated['title'],
+            'pay' => $validated['pay'],
             'description' => $validated['description'] ?? null,
             'date_time' => $validated['date_time'] ?? null,
             'urgency' => $validated['urgency'] ?? null,

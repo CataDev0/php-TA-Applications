@@ -1,3 +1,4 @@
+@php use Carbon\Carbon; @endphp
 @extends('layouts.app')
 
 @section('content')
@@ -30,28 +31,50 @@
                 @if($tasks->isEmpty())
                     <p class="text-gray-600 text-center py-8">No application requests available.</p>
                 @else
-                    <div class="overflow-x-auto">
+                    <div class="overflow-x-auto -mx-4 sm:-mx-6 lg:-mx-8">
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50">
                             <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Teacher</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">TA</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Urgency</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Title
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Description
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Pay
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Teacher
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    TA
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Urgency
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Date
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Status
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Actions
+                                </th>
                             </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
                             @foreach ($tasks as $task)
                                 <tr class="hover:bg-gray-50">
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    <td class="px-6 py-4 text-sm font-medium text-gray-900">
                                         {{ $task->title }}
                                     </td>
                                     <td class="px-6 py-4 text-sm text-gray-600">
                                         {{ Str::limit($task->description, 50) }}
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-600">
+                                        {{ $task->pay }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                                         {{ $task->teacher->firstname }} {{ $task->teacher->lastname }}
@@ -74,7 +97,7 @@
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                                        {{ $task->date_time ? \Carbon\Carbon::parse($task->date_time)->format('M d, Y') : 'N/A' }}
+                                        {{ $task->date_time ? Carbon::parse($task->date_time)->format('M d, Y') : 'N/A' }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                             <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full
@@ -87,7 +110,8 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
                                         @if (Auth::user()->isTA() && $task->status === 'pending' && !$task->ta_id)
-                                            <form method="POST" action="{{ route('tasks.accept', $task->id) }}" class="inline">
+                                            <form method="POST" action="{{ route('tasks.accept', $task->id) }}"
+                                                  class="inline">
                                                 @csrf
                                                 <button type="submit"
                                                         class="inline-flex items-center px-3 py-1 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
@@ -97,7 +121,8 @@
                                         @endif
 
                                         @if ((Auth::user()->id === $task->teacher_id || Auth::user()->id === $task->ta_id) && $task->status !== 'completed')
-                                            <form method="POST" action="{{ route('tasks.complete', $task->id) }}" class="inline">
+                                            <form method="POST" action="{{ route('tasks.complete', $task->id) }}"
+                                                  class="inline">
                                                 @csrf
                                                 <button type="submit"
                                                         class="inline-flex items-center px-3 py-1 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
