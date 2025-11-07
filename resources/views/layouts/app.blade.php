@@ -19,6 +19,7 @@
             </div>
 
             <div class="flex items-center gap-4">
+                {{-- If user is authenticated, shows names, role --}}
                 @auth
                     <span class="text-sm text-gray-700 ">
                             {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}
@@ -29,7 +30,7 @@
                        class="text-sm text-gray-700 hover:text-gray-900">
                         Tasks
                     </a>
-
+                    {{-- If user is a teacher, lets them create a task --}}
                     @if(Auth::user()->isTeacher())
                         <a href="{{ route('tasks.create') }}"
                            class="text-sm text-gray-700 hover:text-gray-900">
@@ -37,13 +38,16 @@
                         </a>
                     @endif
 
+                    {{-- Form handles logout, if user is logged in --}}
                     <form method="POST" action="{{ route('logout') }}" class="inline">
+                        {{-- Protects the form from Cross site request forgeries --}}
                         @csrf
                         <button type="submit"
                                 class="text-sm text-gray-700 hover:text-gray-900 hover:cursor-pointer">
                             Logout
                         </button>
                     </form>
+                {{-- If user is not logged in, shows login link --}}
                 @else
                     <a href="{{ route('login') }}"
                        class="text-sm text-gray-700 hover:text-gray-900">
