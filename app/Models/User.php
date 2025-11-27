@@ -51,6 +51,16 @@ class User extends Authenticatable
         ];
     }
 
+    public function fullName()
+    {
+        return $this->getAttributeValue("firstname") . " " . $this->getAttributeValue("lastname");
+    }
+
+    public function getRoleName()
+    {
+        return $this->getAttributeValue("role") === "ta" ? "Teaching Assistant" : "Teacher";
+    }
+
     // Tasks created by teachers
     public function createdTasks()
     {

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 
@@ -37,6 +38,12 @@ Route::middleware(['auth'])->group(function () {
     // Mark a task as completed
     Route::post('/tasks/{id}/complete', [TaskController::class, 'complete'])->name('tasks.complete');
 });
+
+// User routes
+Route::middleware(['auth'])->group(fn() => [
+    Route::get('/profile', [UserController::class, 'showProfile'])->name('user.profile'),
+    Route::post('/profile', [UserController::class, 'editProfile'])->name('user.editProfile')
+]);
 
 // Error page
 Route::get("/error", [Controller::class, "error"])->name('error');

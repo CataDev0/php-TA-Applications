@@ -25,7 +25,10 @@
                             {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}
                             <span class="text-gray-500">({{ Auth::user()->role }})</span>
                         </span>
-
+                    <a href="{{ route('user.profile') }}"
+                       class="text-sm text-gray-700 hover:text-gray-900">
+                        Profile
+                    </a>
                     <a href="{{ route('tasks.index') }}"
                        class="text-sm text-gray-700 hover:text-gray-900">
                         Tasks
@@ -47,7 +50,7 @@
                             Logout
                         </button>
                     </form>
-                {{-- If user is not logged in, shows login link --}}
+                    {{-- If user is not logged in, shows login link --}}
                 @else
                     <a href="{{ route('login') }}"
                        class="text-sm text-gray-700 hover:text-gray-900">
