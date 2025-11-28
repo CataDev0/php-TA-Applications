@@ -43,8 +43,18 @@ class UserController extends Controller
 
         // Only update password if provided
         if ($request->filled('password')) {
-            $user->password = Hash::make($request->password);
+            $password = $request->input('password');
+            $password_confirmation = $request->input('password_confirmation');
+
+            if ($password === $password_confirmation) {
+                $user->password = Hash::make($password);
+            }
+
+            else {
+                return redirect()->back()->with(['error', 'password'], 'Passwords do not match!');
+            }
         }
+
         $user->save();
 
         return redirect()

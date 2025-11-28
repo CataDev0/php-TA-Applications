@@ -68,5 +68,7 @@
     </div>
 </main>
 <footer class="bottom-0 w-full fixed text-center bg-gray-200">PHP IS-115 2025</footer>
+
+@yield('scripts')
 </body>
 </html>
