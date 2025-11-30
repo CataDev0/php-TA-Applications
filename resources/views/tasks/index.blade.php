@@ -28,6 +28,21 @@
                     </div>
                 @endif
 
+                <div class="flex flex-wrap items-center gap-3 mb-4">
+                    <label for="sort-key" class="text-sm text-gray-600">Sortér etter</label>
+                    <select id="sort-key" class="border rounded px-3 py-2">
+                        <option value="date">Dato</option>
+                        <option value="pay">Pay</option>
+                        <option value="urgency">Urgency</option>
+                        <option value="title">Title</option>
+                    </select>
+
+                    <select id="sort-dir" class="border rounded px-3 py-2">
+                        <option value="desc">Synkende (↓)</option>
+                        <option value="asc">Stigende (↑)</option>
+                    </select>
+                </div>
+
                 @if($tasks->isEmpty())
                     <p class="text-gray-600 text-center py-8">No application requests available.</p>
                 @else
@@ -66,7 +81,11 @@
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
                             @foreach ($tasks as $task)
-                                <tr class="hover:bg-gray-50">
+                                <tr class="hover:bg-gray-50"
+                                    data-pay="{{ $task->pay }}"
+                                    data-urgency="{{ $task->urgency }}"
+                                    data-date="{{ $task->date_time }}"
+                                    data-title="{{ $task->title }}">
                                     <td class="px-6 py-4 text-sm font-medium text-gray-900">
                                         {{ $task->title }}
                                     </td>
