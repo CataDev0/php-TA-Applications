@@ -42,7 +42,8 @@ Route::middleware(['auth'])->group(function () {
 // User routes
 Route::middleware(['auth'])->group(fn() => [
     Route::get('/profile', [UserController::class, 'showProfile'])->name('user.profile'),
-    Route::post('/profile', [UserController::class, 'editProfile'])->name('user.editProfile')
+    Route::post('/profile/update', [UserController::class, 'editProfile'])->name('user.editProfile'),
+    Route::post('/profile/about', [UserController::class, 'editAboutMe'])->name('user.editAboutMe'),
 ]);
 
 // Error page

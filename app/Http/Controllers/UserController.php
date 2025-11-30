@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -12,8 +13,7 @@ class UserController extends Controller
     // Profile view
     public function showProfile()
     {
-        $user = Auth::user();
-        if (!$user) abort(401, "You are not authorized");
+        $user = UserController::authorize();
 
         return view('user.profile', ["user" => $user]);
     }
@@ -21,8 +21,7 @@ class UserController extends Controller
     // Edit profile submit
     public function editProfile(Request $request)
     {
-        $user = Auth::user();
-        if (!$user) abort(401, "You are not authorized");
+        $user = $user = UserController::authorize();
 
         // Validate the form data using specific rules
         $request->validate([
@@ -48,10 +47,9 @@ class UserController extends Controller
 
             if ($password === $password_confirmation) {
                 $user->password = Hash::make($password);
-            }
-
-            else {
-                return redirect()->back()->with(['error', 'password'], 'Passwords do not match!');
+            } else {
+                return redirect()->back()
+                    ->withErrors(['password' => 'Passwords do not match!']);
             }
         }
 
@@ -60,5 +58,26 @@ class UserController extends Controller
         return redirect()
             ->back()
             ->with('success', 'Profile updated successfully!');
+    }
+
+    // Edit aboutme profile field
+    public function editAboutMe(Request $request)
+    {
+        $user = UserController::authorize();
+        $request->validate([
+            'aboutme' => 'nullable|string|max:255',
+        ]);
+        // Update the about field
+        $user->about = $request->aboutme;
+        $user->save();
+
+        return redirect()->back()->with('success', '"About me" updated successfully!');
+    }
+
+    private function authorize(): Authenticatable
+    {
+        $user = Auth::user();
+        if (!$user) abort(401, "You are not authorized");
+        return $user;
     }
 }

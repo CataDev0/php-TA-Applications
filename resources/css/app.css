@@ -10,7 +10,13 @@
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
+/* Sets table borders */
 tr.border-1 > td,th {
     border-style: var(--tw-border-style);
     border-width: 1px;
+}
+
+/* Form inputs automatically gets gray background */
+form input, form textarea, form select {
+    @apply bg-gray-200;
 }
