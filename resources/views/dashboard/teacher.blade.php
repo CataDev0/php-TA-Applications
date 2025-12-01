@@ -35,13 +35,13 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                             </svg>
                         </div>
-                        <h2 class="text-xl font-semibold mb-2">My Emner</h2>
+                        <h2 class="text-xl font-semibold mb-2">My Subjects</h2>
                         <p class="text-gray-600 mb-4">
                             Manage your subjects and view TA applications
                         </p>
                         <a href="{{ route('emner.index') }}"
                            class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                            Manage Emner
+                            Manage Subjects
                         </a>
                     </div>
 
@@ -77,7 +77,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
                                 <div class="text-2xl font-bold text-blue-700">{{ $userEmner->count() }}</div>
-                                <div class="text-sm text-blue-600">Assigned Emner</div>
+                                <div class="text-sm text-blue-600">Assigned Subjects</div>
                             </div>
                             <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
                                 <div class="text-2xl font-bold text-yellow-700">{{ $totalApplications }}</div>
@@ -93,7 +93,7 @@
                     <!-- My Emner Quick Access -->
                     <div class="mt-8">
                         <div class="flex justify-between items-center mb-4">
-                            <h2 class="text-xl font-semibold">My Emner - Quick Access</h2>
+                            <h2 class="text-xl font-semibold">My Subjects - Quick Access</h2>
                             <a href="{{ route('emner.index') }}" class="text-sm text-gray-600 hover:text-gray-900">View all →</a>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">

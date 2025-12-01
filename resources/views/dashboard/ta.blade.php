@@ -45,7 +45,7 @@
                         </div>
                         <h2 class="text-xl font-semibold mb-2">TA Positions</h2>
                         <p class="text-gray-600 mb-4">
-                            Browse and apply for open TA positions in different emner (subjects)
+                            Browse and apply for open TA positions in different subjects
                         </p>
                         <a href="{{ route('ta-positions.index') }}"
                            class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
@@ -69,7 +69,7 @@
                             <div class="ml-3">
                                 <h3 class="text-sm font-medium text-blue-800">Getting Started as a TA</h3>
                                 <div class="mt-2 text-sm text-blue-700">
-                                    <p class="mb-2">You're not assigned to any emner yet. Here's how to get started:</p>
+                                    <p class="mb-2">You're not assigned to any subjects yet. Here's how to get started:</p>
                                     <ol class="list-decimal pl-5 space-y-1">
                                         <li>Browse <strong>TA Positions</strong> to see all available openings</li>
                                         <li>Apply for positions in subjects you're interested in</li>
@@ -82,7 +82,7 @@
                     </div>
                 @else
                     <div class="mt-8 pt-8 border-t border-gray-200">
-                        <h2 class="text-xl font-semibold mb-4">Your Assigned Emner</h2>
+                        <h2 class="text-xl font-semibold mb-4">Your Assigned Subjects</h2>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                             @foreach($userEmner as $emne)
                                 <div class="border border-gray-200 rounded-lg p-4 bg-green-50 border-green-200">
@@ -92,7 +92,7 @@
                             @endforeach
                         </div>
                         <p class="mt-4 text-sm text-gray-600">
-                            You can see tasks for these subjects. Apply for more positions to get assigned to additional emner.
+                            You can see tasks for these subjects. Apply for more positions to get assigned to additional Subjects.
                         </p>
                     </div>
                 @endif

@@ -62,10 +62,9 @@
                                 <div class="mt-2 text-sm text-blue-700">
                                     <ul class="list-disc pl-5 space-y-1">
                                         <li>The position will be created for <strong>{{ $emne }}</strong></li>
-                                        <li>It will be visible to all TAs who have this emne assigned</li>
-                                        <li>TAs can apply with an optional message</li>
+                                        <li>It will be visible to all TAs who have this subject assigned</li>
                                         <li>You can accept or reject applications from the applications page</li>
-                                        <li>When you accept an application, the TA is automatically assigned to this emne</li>
+                                        <li>When you accept an application, the TA is automatically assigned to this subject</li>
                                     </ul>
                                 </div>
                             </div>
