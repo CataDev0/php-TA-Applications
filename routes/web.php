@@ -65,7 +65,7 @@ Route::middleware(['auth'])->group(fn() => [
     Route::post('/profile/update', [UserController::class, 'editProfile'])->name('user.editProfile'),
     Route::post('/profile/about', [UserController::class, 'editAboutMe'])->name('user.editAboutMe'),
     Route::post('/profile/upload', [UserController::class, 'uploadDocument'])->name('user.uploadDocument'),
-    Route::post('/profile/delete', [UserController::class, 'deleteDocument'])->name('user.deleteDocument'),
+    Route::delete('/profile/delete', [UserController::class, 'deleteDocument'])->name('user.deleteDocument'),
 ]);
 
 // Error page

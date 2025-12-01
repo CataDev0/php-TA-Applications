@@ -135,15 +135,20 @@
 
                         {{-- Display all documents --}}
                         {{-- Using mostly raw PHP here, only to showcase it is working --}}
-                        <?php foreach ($files as $document): ?>
-                            <form action="<?= route('user.deleteDocument', ['name' => $document['name']]) ?>" method="POST"
-                                  onsubmit="return confirm('Are you sure you want to delete this document?');">
-                                    <?= csrf_field() ?>
-                                    <?= method_field('DELETE') ?>
+                        <h3 class="text-lg mt-10">Uploaded Documents</h3>
+                        <br>
+                            <?php foreach ($files as $document): ?>
+                        <form action="<?= route('user.deleteDocument', ['name' => $document['name']]) ?>"
+                              method="POST"
+                              onsubmit="return confirm('Are you sure you want to delete this document?');">
+                                <?= csrf_field() ?>
+                                <?= method_field('DELETE') ?>
                                 <?= htmlspecialchars($document['name']) ?>
-                                <a class="text-blue-500" href="<?= htmlspecialchars($document['url']) ?>">Download</a>
-                                <button type="submit" class="text-red-600 font-semibold hover:underline">Delete</button>
-                            </form>
+                            <a class="text-blue-500"
+                               href="<?= htmlspecialchars($document['url']) ?>">Download</a>
+                            <button type="submit" class="text-red-600 font-semibold hover:underline">Delete
+                            </button>
+                        </form>
                         <?php endforeach; ?>
                     </div>
                 </div>

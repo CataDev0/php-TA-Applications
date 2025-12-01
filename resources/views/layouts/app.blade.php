@@ -25,6 +25,10 @@
                             {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}
                             <span class="text-gray-500">({{ Auth::user()->role }})</span>
                         </span>
+                    <a href="{{ route('dashboard') }}"
+                       class="text-sm text-gray-700 hover:text-gray-900">
+                        Dashboard
+                    </a>
                     <a href="{{ route('user.profile') }}"
                        class="text-sm text-gray-700 hover:text-gray-900">
                         Profile

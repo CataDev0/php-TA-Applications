@@ -77,6 +77,7 @@ class UserController extends Controller
     public function editAboutMe(Request $request)
     {
         $user = UserController::authorize();
+        // It is nullable if the user wants to leave it empty
         $request->validate([
             'aboutme' => 'nullable|string|max:255',
         ]);
@@ -89,6 +90,7 @@ class UserController extends Controller
 
     public function uploadDocument(Request $request) {
         $user = UserController::authorize();
+        // Both are required
         $request->validate([
             "title" => "required|string|max:50",
             "file" => "required|mimes:pdf,doc,docx,jpg,jpeg,png|max:10000"
@@ -97,6 +99,21 @@ class UserController extends Controller
         $request->file('file')->storeAs("ta-apps/documents/{$user->id}", "$request->title", "s3");
 
         return redirect()->back()->with('success', 'Document uploaded successfully!');
+    }
+
+    public function deleteDocument(Request $request)
+    {
+        $user = UserController::authorize();
+        // Make sure it is a string
+        $request->validate([
+           "name" => "required|string"
+        ]);
+
+        $deleted = Storage::disk("s3")->delete("ta-apps/documents/{$user->id}/{$request->name}");
+
+        if (!$deleted) abort(404, "File not found");
+
+        return redirect()->back()->with('success', 'Document deleted successfully!');
     }
 
     private function authorize(): Authenticatable
