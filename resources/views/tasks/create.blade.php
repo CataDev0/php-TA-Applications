@@ -71,9 +71,9 @@
                     <!-- Date & Time -->
                     <div>
                         <label for="date_time" class="block text-sm font-medium text-gray-700 mb-2">
-                            Date & Time
+                            Date
                         </label>
-                        <input type="datetime-local"
+                        <input type="date"
                                name="date_time"
                                id="date_time"
                                value="{{ old('date_time') }}"
