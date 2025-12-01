@@ -23,11 +23,11 @@ class LoginController extends Controller
         ]);
 
         // Attempt to authenticate the user
-        // if successful, redirect to the list of tasks
+        // if successful, redirect to the dashboard
         if (Auth::attempt(['username' => $request ->username, 'password' => $request->password])) {
             $request->session()->regenerate();
 
-            return redirect()->intended(route('tasks.index'));
+            return redirect()->intended(route('dashboard'));
         }
 
         // If authentication fails, redirect back with an error message

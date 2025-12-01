@@ -74,4 +74,40 @@ class User extends Authenticatable
     {
         return $this->role === 'ta';
     }
+
+    // Get teacher's assigned emner
+    public function teacherEmner()
+    {
+        return $this->hasMany(TeacherEmne::class, 'user_id');
+    }
+
+    // Get TA's assigned emner
+    public function taEmner()
+    {
+        return $this->hasMany(TAEmne::class, 'user_id');
+    }
+
+    // Check if teacher has access to an emne
+    public function hasEmne($emne)
+    {
+        if ($this->isTeacher()) {
+            return $this->teacherEmner()->where('emne', $emne)->exists();
+        }
+        if ($this->isTA()) {
+            return $this->taEmner()->where('emne', $emne)->exists();
+        }
+        return false;
+    }
+
+    // Get list of emner names
+    public function getEmnerList()
+    {
+        if ($this->isTeacher()) {
+            return $this->teacherEmner()->pluck('emne')->toArray();
+        }
+        if ($this->isTA()) {
+            return $this->taEmner()->pluck('emne')->toArray();
+        }
+        return [];
+    }
 }
