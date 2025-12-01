@@ -15,18 +15,20 @@ class UserController extends Controller
     public function showProfile()
     {
         $user = UserController::authorize();
+        // Uses S3 storage to get all user documents from the cloud
         $documents = Storage::disk("s3")->allFiles("ta-apps/documents/{$user->id}");
 
+        // Maps files into names and download URLs
         $files = collect($documents)->map(function ($path) {
             return [
                 'name' => basename($path),
                 'url' => Storage::disk('s3')->temporaryUrl(
                     $path,
+                    // Links are only valid for 30 minutes
                     now()->addMinutes(30)
                 ),
             ];
         });
-
 
         return view('user.profile', ["user" => $user, "files" => $files]);
     }
@@ -88,6 +90,7 @@ class UserController extends Controller
         return redirect()->back()->with('success', '"About me" updated successfully!');
     }
 
+    // Upload a doc to your profile
     public function uploadDocument(Request $request) {
         $user = UserController::authorize();
         // Both are required
@@ -101,6 +104,7 @@ class UserController extends Controller
         return redirect()->back()->with('success', 'Document uploaded successfully!');
     }
 
+    // Delete a doc from your profile
     public function deleteDocument(Request $request)
     {
         $user = UserController::authorize();
@@ -116,6 +120,7 @@ class UserController extends Controller
         return redirect()->back()->with('success', 'Document deleted successfully!');
     }
 
+    // Authorize user
     private function authorize(): Authenticatable
     {
         $user = Auth::user();

@@ -61,7 +61,10 @@ Route::middleware(['auth'])->group(function () {
 
 // User routes
 Route::middleware(['auth'])->group(fn() => [
+    // Profile page
     Route::get('/profile', [UserController::class, 'showProfile'])->name('user.profile'),
+
+    // Update names, email, phone, password, About Me, Upload and delete Documents
     Route::post('/profile/update', [UserController::class, 'editProfile'])->name('user.editProfile'),
     Route::post('/profile/about', [UserController::class, 'editAboutMe'])->name('user.editAboutMe'),
     Route::post('/profile/upload', [UserController::class, 'uploadDocument'])->name('user.uploadDocument'),

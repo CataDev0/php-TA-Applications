@@ -134,7 +134,7 @@
                         </form>
 
                         {{-- Display all documents --}}
-                        {{-- Using mostly raw PHP here, only to showcase it is working --}}
+                        {{-- Using mostly raw PHP here, only to showcase that it works --}}
                         <h3 class="text-lg mt-10">Uploaded Documents</h3>
                         <br>
                             <?php foreach ($files as $document): ?>
