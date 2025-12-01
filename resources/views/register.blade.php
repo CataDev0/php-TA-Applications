@@ -32,6 +32,7 @@
                             required
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
                             placeholder="Enter your first name"
+                            value="{{ old('firstname') }}"
                         />
                     </div>
 
@@ -46,6 +47,7 @@
                             required
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
                             placeholder="Enter your last name"
+                            value="{{ old('lastname') }}"
                         />
                     </div>
 
@@ -75,6 +77,7 @@
                             required
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
                             placeholder="Enter your email"
+                            value="{{ old('email') }}"
                         />
                     </div>
 
@@ -89,6 +92,7 @@
                             required
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
                             placeholder="Enter your phone number"
+                            value="{{ old('phone') }}"
                         />
                     </div>
 
@@ -108,7 +112,7 @@
 
                     <div>
                         <label for="password_confirmation" class="block text-sm font-semibold text-gray-700 mb-2">
-                            Password
+                            Confirm Password
                         </label>
                         <input
                             type="password"
@@ -122,16 +126,17 @@
 
                     <div>
                         <label for="role" class="block text-sm font-semibold text-gray-700 mb-2">
-                            Role
+                            User Role
                         </label>
-                        <input
+                        <select
                             type="role"
                             name="role"
                             id="role"
                             required
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
-                            placeholder="Enter your role (teacher/ta)"
-                        />
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+                                <option value="ta">Teacher Assistant</option>
+                                <option value="teacher">Teacher</option>
+                        </select>
                     </div>
 
                     <div class="pt-2">
