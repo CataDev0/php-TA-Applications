@@ -39,6 +39,20 @@
                         @enderror
                     </div>
 
+                    <div>
+                        <label for="emne" class="block text-sm font-medium text-gray-700 mb-2">
+                            Emne
+                        </label>
+                        <input type="text"
+                               name="emne"
+                               id="emne"
+                               value="{{ old('emne') }}"
+                               class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm">
+                        @error('emne')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+
                     <!-- Pay -->
                     <div>
                         <label for="pay" class="block text-sm font-medium text-gray-700 mb-2">
@@ -57,9 +71,9 @@
                     <!-- Date & Time -->
                     <div>
                         <label for="date_time" class="block text-sm font-medium text-gray-700 mb-2">
-                            Date & Time
+                            Date
                         </label>
-                        <input type="datetime-local"
+                        <input type="date"
                                name="date_time"
                                id="date_time"
                                value="{{ old('date_time') }}"
