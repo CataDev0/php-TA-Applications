@@ -56,6 +56,7 @@ class TaskController extends Controller
             'title' => 'required|string|max:255',
             'pay' => 'required|numeric|min:0',
             'description' => 'nullable|string',
+            'emne' => 'nullable|string|max:255',
             'date_time' => 'nullable|date',
             'urgency' => 'nullable|string|max:50',
         ]);
@@ -64,6 +65,7 @@ class TaskController extends Controller
             'title' => $validated['title'],
             'pay' => $validated['pay'],
             'description' => $validated['description'] ?? null,
+            'emne' => $validated['emne'] ?? null,
             'date_time' => $validated['date_time'] ?? null,
             'urgency' => $validated['urgency'] ?? null,
             'status' => 'pending',

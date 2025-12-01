@@ -13,6 +13,7 @@ class Task extends Model
         'urgency',
         'status',
         'pay',
+        'emne',
         'teacher_id',
         'ta_id',
     ];

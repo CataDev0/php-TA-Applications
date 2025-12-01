@@ -57,6 +57,9 @@
                                     Description
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Emne
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Pay
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -91,6 +94,9 @@
                                     </td>
                                     <td class="px-6 py-4 text-sm text-gray-600">
                                         {{ Str::limit($task->description, 50) }}
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-600">
+                                        {{ $task->emne ?? 'N/A' }}
                                     </td>
                                     <td class="px-6 py-4 text-sm text-gray-600">
                                         {{ $task->pay }}
