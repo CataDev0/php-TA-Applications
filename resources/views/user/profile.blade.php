@@ -101,6 +101,50 @@
                                     type="submit">Save
                             </button>
                         </form>
+
+                        {{-- CVs and Documents --}}
+                        <h2 class="text-2xl mt-10">Documents</h2>
+                        <h4 class="text-sm mt-2 text-gray-600">Upload relevant documents</h4>
+
+                        <form id="documentUploadForm" action="{{ route('user.uploadDocument') }}" method="POST"
+                              enctype="multipart/form-data" class="mt-4 form-class-dom">
+                            @csrf
+
+                            <label for="title" class="block text-lg text-blue-900 mb-1">Document Title</label>
+                            <input type="text" name="title" id="title"
+                                   placeholder="CV, Previous experience, Grade, Transcript, Certificate"
+                                   class="w-full p-2 rounded-md bg-gray-200 mb-4">
+
+                            <label for="file" class="block text-lg text-blue-900 mb-1">Choose File</label>
+                            <input type="file" name="file" id="file"
+                                   accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                                   class="w-full p-2 rounded-md bg-gray-200">
+
+                            <button type="submit"
+                                    class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md mt-4">
+                                Upload Document
+                            </button>
+
+                            @error('title')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                            @error('file')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                        </form>
+
+                        {{-- Display all documents --}}
+                        {{-- Using mostly raw PHP here, only to showcase it is working --}}
+                        <?php foreach ($files as $document): ?>
+                            <form action="<?= route('user.deleteDocument', ['name' => $document['name']]) ?>" method="POST"
+                                  onsubmit="return confirm('Are you sure you want to delete this document?');">
+                                    <?= csrf_field() ?>
+                                    <?= method_field('DELETE') ?>
+                                <?= htmlspecialchars($document['name']) ?>
+                                <a class="text-blue-500" href="<?= htmlspecialchars($document['url']) ?>">Download</a>
+                                <button type="submit" class="text-red-600 font-semibold hover:underline">Delete</button>
+                            </form>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>

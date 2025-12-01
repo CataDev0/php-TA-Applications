@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 // Controller handling user functionality
 class UserController extends Controller
@@ -14,8 +15,20 @@ class UserController extends Controller
     public function showProfile()
     {
         $user = UserController::authorize();
+        $documents = Storage::disk("s3")->allFiles("ta-apps/documents/{$user->id}");
 
-        return view('user.profile', ["user" => $user]);
+        $files = collect($documents)->map(function ($path) {
+            return [
+                'name' => basename($path),
+                'url' => Storage::disk('s3')->temporaryUrl(
+                    $path,
+                    now()->addMinutes(30)
+                ),
+            ];
+        });
+
+
+        return view('user.profile', ["user" => $user, "files" => $files]);
     }
 
     // Edit profile submit
@@ -72,6 +85,18 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->back()->with('success', '"About me" updated successfully!');
+    }
+
+    public function uploadDocument(Request $request) {
+        $user = UserController::authorize();
+        $request->validate([
+            "title" => "required|string|max:50",
+            "file" => "required|mimes:pdf,doc,docx,jpg,jpeg,png|max:10000"
+        ]);
+
+        $request->file('file')->storeAs("ta-apps/documents/{$user->id}", "$request->title", "s3");
+
+        return redirect()->back()->with('success', 'Document uploaded successfully!');
     }
 
     private function authorize(): Authenticatable
