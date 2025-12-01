@@ -29,17 +29,17 @@
                 @endif
 
                 <div class="flex flex-wrap items-center gap-3 mb-4">
-                    <label for="sort-key" class="text-sm text-gray-600">Sortér etter</label>
+                    <label for="sort-key" class="text-sm text-gray-600">Sort by</label>
                     <select id="sort-key" class="border rounded px-3 py-2">
-                        <option value="date">Dato</option>
+                        <option value="date">Date</option>
                         <option value="pay">Pay</option>
                         <option value="urgency">Urgency</option>
                         <option value="title">Title</option>
                     </select>
 
                     <select id="sort-dir" class="border rounded px-3 py-2">
-                        <option value="desc">Synkende (↓)</option>
-                        <option value="asc">Stigende (↑)</option>
+                        <option value="desc">Descending (↓)</option>
+                        <option value="asc">Ascending (↑)</option>
                     </select>
                 </div>
 
