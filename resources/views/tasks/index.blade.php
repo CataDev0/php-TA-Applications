@@ -8,12 +8,22 @@
                 <div class="flex justify-between items-center mb-6">
                     <h1 class="text-2xl font-semibold">Application requests</h1>
 
-                    @if(Auth::user()->isTeacher())
-                        <a href="{{ route('tasks.create') }}"
-                           class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                            Create New Application Request
+                    <div class="flex gap-3">
+                        <a href="{{ route('dashboard') }}"
+                           class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                            ← Dashboard
                         </a>
-                    @endif
+                        @if(Auth::user()->isTeacher())
+                            <a href="{{ route('emner.index') }}"
+                               class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                Manage My Subjects
+                            </a>
+                            <a href="{{ route('tasks.create') }}"
+                               class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                Create New Application Request
+                            </a>
+                        @endif
+                    </div>
                 </div>
 
                 @if(session('success'))
@@ -57,6 +67,9 @@
                                     Description
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Emne
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Pay
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -93,6 +106,9 @@
                                         {{ Str::limit($task->description, 50) }}
                                     </td>
                                     <td class="px-6 py-4 text-sm text-gray-600">
+                                        {{ $task->emne ?? 'N/A' }}
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-600">
                                         {{ $task->pay }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
@@ -116,7 +132,7 @@
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                                        {{ $task->date_time ? Carbon::parse($task->date_time)->format('M d, Y') : 'N/A' }}
+                                        {{ $task->date_time ? Carbon::parse($task->date_time)->format('d.m.Y') : 'N/A' }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                             <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full

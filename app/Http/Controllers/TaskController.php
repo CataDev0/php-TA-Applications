@@ -15,15 +15,32 @@ class TaskController extends Controller
         if (!$user) abort(401, "You are not authorized");
 
         if ($user->isTeacher()) {
-            // Teachers see tasks they created
-            $tasks = Task::where('teacher_id', $user->id)->get();
+            // Teachers see tasks they created in their assigned emner
+            $userEmner = $user->getEmnerList();
+
+            $tasks = Task::where('teacher_id', $user->id)
+                ->when(!empty($userEmner), function($query) use ($userEmner) {
+                    $query->whereIn('emne', $userEmner);
+                })
+                ->get();
         }
         else {
-            // TAs see open tasks and tasks they accepted
-            $tasks = Task::where(function ($query) use ($user) {
-                $query->whereNull('ta_id')
-                      ->orWhere('ta_id', $user->id);
-            })->get();
+            // TAs see open tasks and tasks they accepted, BUT ONLY for their assigned emner
+            $userEmner = $user->getEmnerList();
+
+            if (empty($userEmner)) {
+                // If TA has no assigned emner, they see NO tasks
+                // They need to apply and be accepted for positions first
+                $tasks = collect(); // Empty collection
+            } else {
+                // TAs with assigned emner see tasks in those emner
+                $tasks = Task::where(function ($query) use ($user) {
+                    $query->whereNull('ta_id')
+                          ->orWhere('ta_id', $user->id);
+                })
+                ->whereIn('emne', $userEmner)
+                ->get();
+            }
         }
 
         return view('tasks.index', compact('tasks'));
@@ -54,6 +71,7 @@ class TaskController extends Controller
             'title' => 'required|string|max:255',
             'pay' => 'required|numeric|min:0',
             'description' => 'nullable|string',
+            'emne' => 'nullable|string|max:255',
             'date_time' => 'nullable|date',
             'urgency' => 'nullable|string|max:50',
         ]);
@@ -62,6 +80,7 @@ class TaskController extends Controller
             'title' => $validated['title'],
             'pay' => $validated['pay'],
             'description' => $validated['description'] ?? null,
+            'emne' => $validated['emne'] ?? null,
             'date_time' => $validated['date_time'] ?? null,
             'urgency' => $validated['urgency'] ?? null,
             'status' => 'pending',
